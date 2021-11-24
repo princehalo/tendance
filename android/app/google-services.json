@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "946879031960",
+    "firebase_url": "https://tended-c6f69-default-rtdb.firebaseio.com",
+    "project_id": "tended-c6f69",
+    "storage_bucket": "tended-c6f69.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:946879031960:android:d62742f6b79e59ff48beed",
+        "android_client_info": {
+          "package_name": "com.primdevelopers.tendance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "946879031960-0jsh1rrh1vat8qk0qiu2ueisedr4i72r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbi2T26B70GMZ5Cl9KnULheqcp_WJvK74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "946879031960-0jsh1rrh1vat8qk0qiu2ueisedr4i72r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:946879031960:android:74b7f903c18d128e48beed",
+        "android_client_info": {
+          "package_name": "com.primdevelopers.tended"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "946879031960-0jsh1rrh1vat8qk0qiu2ueisedr4i72r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbi2T26B70GMZ5Cl9KnULheqcp_WJvK74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "946879031960-0jsh1rrh1vat8qk0qiu2ueisedr4i72r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
