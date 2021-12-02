@@ -1,7 +1,14 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(Tendance());
+  runApp(Tendance(
+    initialRoute: '/splashScreen',
+    routes: {
+      '/splashScreen': (context) => SplashScreen(),
+    }
+  ));
 }
 
 class Tendance extends StatefulWidget {
@@ -10,6 +17,7 @@ class Tendance extends StatefulWidget {
   @override
   _TendanceState createState() => _TendanceState();
 }
+
 
 class _TendanceState extends State<Tendance> {
   @override
@@ -22,7 +30,7 @@ class _TendanceState extends State<Tendance> {
         ),
         body: Center(
           child: Container(
-            child: Text('Hello World'),
+            child: Text('Hello New Github Repo!'),
           ),
         ),
       ),
