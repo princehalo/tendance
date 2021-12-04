@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tendance/infrastructure/constants.dart';
-import 'package:tendance/domain/services/helper.dart';
-import 'package:tendance/presentation/authentication_bloc.dart';
-import 'package:tendance/application/screens/onBoarding/onboarding_screen.dart';
-import 'package:tendance/application/screens/welcome/welcome_screen.dart';
-import 'package:tendance/application/home/home_screen.dart';
+import 'package:tendance/constants.dart';
+import 'package:tendance/services/helper.dart';
+import 'package:tendance/ui/auth/authentication_bloc.dart';
+import 'package:tendance/ui/auth/onBoarding/on_boarding_screen.dart';
+import 'package:tendance/ui/auth/welcome/welcome_screen.dart';
+import 'package:tendance/ui/home/home_screen.dart';
 
 class LauncherScreen extends StatefulWidget {
   const LauncherScreen({Key? key}) : super(key: key);

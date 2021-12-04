@@ -4,9 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/widgets.dart';
-import 'package:tendance/infrastructure/constants.dart';
-import 'package:tendance/domain/model/user.dart';
-import 'package:tendance/domain/services/helper.dart';
+//import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:tendance/constants.dart';
+import 'package:tendance/model/user.dart';
+import 'package:tendance/services/helper.dart';
+//import 'package:the_apple_sign_in/the_apple_sign_in.dart' as apple;
 
 class FireStoreUtils {
   static FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -14,7 +16,7 @@ class FireStoreUtils {
 
   static Future<User?> getCurrentUser(String uid) async {
     DocumentSnapshot<Map<String, dynamic>> userDocument =
-    await firestore.collection(USERS).doc(uid).get();
+        await firestore.collection(USERS).doc(uid).get();
     if (userDocument.data() != null && userDocument.exists) {
       return User.fromJson(userDocument.data()!);
     } else {
@@ -37,7 +39,7 @@ class FireStoreUtils {
     Reference upload = storage.child("images/$userID.png");
     UploadTask uploadTask = upload.putFile(image);
     var downloadUrl =
-    await (await uploadTask.whenComplete(() {})).ref.getDownloadURL();
+        await (await uploadTask.whenComplete(() {})).ref.getDownloadURL();
     return downloadUrl.toString();
   }
 
@@ -50,7 +52,7 @@ class FireStoreUtils {
       auth.UserCredential result = await auth.FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-      await firestore.collection(USERS).doc(result.user?.uid ?? '').get();
+          await firestore.collection(USERS).doc(result.user?.uid ?? '').get();
       User? user;
       if (documentSnapshot.exists) {
         user = User.fromJson(documentSnapshot.data() ?? {});
@@ -77,6 +79,62 @@ class FireStoreUtils {
     }
   }
 
+  /*static loginWithFacebook() async {
+    FacebookAuth facebookAuth = FacebookAuth.instance;
+    bool isLogged = await facebookAuth.accessToken != null;
+    if (!isLogged) {
+      LoginResult result = await facebookAuth
+          .login(); // by default we request the email and the public profile
+      if (result.status == LoginStatus.success) {
+        // you are logged
+        AccessToken? token = await facebookAuth.accessToken;
+        return await handleFacebookLogin(
+            await facebookAuth.getUserData(), token!);
+      }
+    } else {
+      AccessToken? token = await facebookAuth.accessToken;
+      return await handleFacebookLogin(
+          await facebookAuth.getUserData(), token!);
+    }
+  }*/
+
+  /*static handleFacebookLogin(
+      Map<String, dynamic> userData, AccessToken token) async {
+    auth.UserCredential authResult = await auth.FirebaseAuth.instance
+        .signInWithCredential(
+            auth.FacebookAuthProvider.credential(token.token));
+    User? user = await getCurrentUser(authResult.user?.uid ?? '');
+    List<String> fullName = (userData['name'] as String).split(' ');
+    String firstName = '';
+    String lastName = '';
+    if (fullName.isNotEmpty) {
+      firstName = fullName.first;
+      lastName = fullName.skip(1).join(' ');
+    }
+
+    if (user != null) {
+      user.profilePictureURL = userData['picture']['data']['url'];
+      user.firstName = firstName;
+      user.lastName = lastName;
+      user.email = userData['email'];
+      dynamic result = await updateCurrentUser(user);
+      return result;
+    } else {
+      user = User(
+          email: userData['email'] ?? '',
+          firstName: firstName,
+          lastName: lastName,
+          profilePictureURL: userData['picture']['data']['url'] ?? '',
+          userID: authResult.user?.uid ?? '');
+      String? errorMessage = await createNewUser(user);
+      if (errorMessage == null) {
+        return user;
+      } else {
+        return errorMessage;
+      }
+    }
+  }*/
+
   /// save a new user document in the USERS table in firebase firestore
   /// returns an error message on failure or null on success
   static Future<String?> createNewUser(User user) async => await firestore
@@ -87,22 +145,22 @@ class FireStoreUtils {
 
   static signUpWithEmailAndPassword(
       {required String emailAddress,
-        required String password,
-        File? image,
-        firstName = 'Anonymous',
-        lastName = 'User'}) async {
+      required String password,
+      File? image,
+      firstName = 'Anonymous',
+      lastName = 'User'}) async {
     try {
       auth.UserCredential result = await auth.FirebaseAuth.instance
           .createUserWithEmailAndPassword(
-          email: emailAddress, password: password);
+              email: emailAddress, password: password);
       String profilePicUrl = '';
       if (image != null) {
         updateProgress('Uploading image, Please wait...');
         profilePicUrl =
-        await uploadUserImageToServer(image, result.user?.uid ?? '');
+            await uploadUserImageToServer(image, result.user?.uid ?? '');
       }
       User user = User(
-          emailAddress: emailAddress,
+          email: emailAddress,
           firstName: firstName,
           userID: result.user?.uid ?? '',
           lastName: lastName,
@@ -161,7 +219,7 @@ class FireStoreUtils {
     File? image,
   }) async {
     auth.UserCredential userCredential =
-    await auth.FirebaseAuth.instance.signInWithCredential(credential);
+        await auth.FirebaseAuth.instance.signInWithCredential(credential);
     User? user = await getCurrentUser(userCredential.user?.uid ?? '');
     if (user != null) {
       return user;
@@ -174,9 +232,9 @@ class FireStoreUtils {
       }
       User user = User(
           firstName:
-          firstName!.trim().isNotEmpty ? firstName.trim() : 'Anonymous',
+              firstName!.trim().isNotEmpty ? firstName.trim() : 'Anonymous',
           lastName: lastName!.trim().isNotEmpty ? lastName.trim() : 'User',
-          emailAddress: '',
+          email: '',
           profilePictureURL: profileImageUrl,
           userID: userCredential.user?.uid ?? '');
       String? errorMessage = await createNewUser(user);
@@ -187,6 +245,55 @@ class FireStoreUtils {
       }
     }
   }
+
+  /*static loginWithApple() async {
+    final appleCredential = await apple.TheAppleSignIn.performRequests([
+      const apple.AppleIdRequest(
+          requestedScopes: [apple.Scope.email, apple.Scope.fullName])
+    ]);
+    if (appleCredential.error != null) {
+      return 'Couldn\'t login with apple.';
+    }
+
+    if (appleCredential.status == apple.AuthorizationStatus.authorized) {
+      final auth.AuthCredential credential =
+          auth.OAuthProvider('apple.com').credential(
+        accessToken: String.fromCharCodes(
+            appleCredential.credential?.authorizationCode ?? []),
+        idToken: String.fromCharCodes(
+            appleCredential.credential?.identityToken ?? []),
+      );
+      return await handleAppleLogin(credential, appleCredential.credential!);
+    } else {
+      return 'Couldn\'t login with apple.';
+    }
+  }*/
+
+  /*static handleAppleLogin(
+    auth.AuthCredential credential,
+    apple.AppleIdCredential appleIdCredential,
+  ) async {
+    auth.UserCredential authResult =
+        await auth.FirebaseAuth.instance.signInWithCredential(credential);
+    User? user = await getCurrentUser(authResult.user?.uid ?? '');
+    if (user != null) {
+      return user;
+    } else {
+      user = User(
+        email: appleIdCredential.email ?? '',
+        firstName: appleIdCredential.fullName?.givenName ?? '',
+        profilePictureURL: '',
+        userID: authResult.user?.uid ?? '',
+        lastName: appleIdCredential.fullName?.familyName ?? '',
+      );
+      String? errorMessage = await createNewUser(user);
+      if (errorMessage == null) {
+        return user;
+      } else {
+        return errorMessage;
+      }
+    }
+  }*/
 
   static resetPassword(String emailAddress) async =>
       await auth.FirebaseAuth.instance
