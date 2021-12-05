@@ -1,18 +1,19 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tendance/constants.dart';
 import 'package:tendance/ui/auth/authentication_bloc.dart';
 import 'package:tendance/ui/auth/launcherScreen/launcher_screen.dart';
 import 'package:tendance/ui/loading_cubit.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 
 void main() => runApp(MultiRepositoryProvider(
-      providers: [
-        RepositoryProvider(create: (_) => AuthenticationBloc()),
-        RepositoryProvider(create: (_) => LoadingCubit()),
-      ],
-      child: const Tendance(),
-    ));
+  providers: [
+    RepositoryProvider(create: (_) => AuthenticationBloc()),
+    RepositoryProvider(create: (_) => LoadingCubit()),
+  ],
+  child: const Tendance(),
+));
 
 class Tendance extends StatefulWidget {
   const Tendance({Key? key}) : super(key: key);
@@ -48,25 +49,25 @@ class TendanceState extends State<Tendance> with WidgetsBindingObserver {
     if (_error) {
       return MaterialApp(
           home: Scaffold(
-        body: Container(
-          color: Colors.white,
-          child: Center(
-              child: Column(
-            children: const [
-              Icon(
-                Icons.error_outline,
-                color: Colors.red,
-                size: 25,
-              ),
-              SizedBox(height: 16),
-              Text(
-                'Failed to initialise firebase!',
-                style: TextStyle(color: Colors.red, fontSize: 25),
-              ),
-            ],
-          )),
-        ),
-      ));
+            body: Container(
+              color: Colors.white,
+              child: Center(
+                  child: Column(
+                    children: const [
+                      Icon(
+                        Icons.error_outline,
+                        color: Colors.red,
+                        size: 25,
+                      ),
+                      SizedBox(height: 16),
+                      Text(
+                        'Failed to initialise firebase!',
+                        style: TextStyle(color: Colors.red, fontSize: 25),
+                      ),
+                    ],
+                  )),
+            ),
+          ));
     }
 
     // Show a loader until FlutterFire is initialized

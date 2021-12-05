@@ -24,7 +24,7 @@ class FireStoreUtils {
     }
   }
 
-  static Future<User> updateCurrentUser(User user) async {
+  static Future<User?> updateCurrentUser(User user) async {
     return await firestore
         .collection(USERS)
         .doc(user.userID)
@@ -35,7 +35,7 @@ class FireStoreUtils {
   }
 
   static Future<String> uploadUserImageToServer(
-      File image, String userID) async {
+      File image, String? userID) async {
     Reference upload = storage.child("images/$userID.png");
     UploadTask uploadTask = upload.putFile(image);
     var downloadUrl =

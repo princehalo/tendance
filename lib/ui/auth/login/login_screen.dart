@@ -8,7 +8,7 @@ import 'package:tendance/services/helper.dart';
 import 'package:tendance/ui/auth/authentication_bloc.dart';
 import 'package:tendance/ui/auth/login/login_bloc.dart';
 import 'package:tendance/ui/auth/resetPasswordScreen/reset_password_screen.dart';
-import 'package:tendance/ui/home/home_screen.dart';
+import 'package:tendance/ui/home/student_home.dart';
 import 'package:tendance/ui/loading_cubit.dart';
 //import 'package:the_apple_sign_in/the_apple_sign_in.dart' as apple;
 
@@ -45,7 +45,7 @@ class _LoginScreen extends State<LoginScreen> {
                   context.read<LoadingCubit>().hideLoading();
                   if (state.authState == AuthState.authenticated) {
                     pushAndRemoveUntil(
-                        context, HomeScreen(user: state.user!), false);
+                        context, HomeScreen(user: state.user!, title: '',), false);
                   } else {
                     showSnackBar(context,
                         state.message ?? 'Couldn\'t login, Please try again.');
@@ -178,7 +178,7 @@ class _LoginScreen extends State<LoginScreen> {
                               .add(ValidateLoginFieldsEvent(_key)),
                         ),
                       ),
-                      Padding(
+                      /*Padding(
                         padding: const EdgeInsets.all(32.0),
                         child: Center(
                           child: Text(
@@ -226,7 +226,7 @@ class _LoginScreen extends State<LoginScreen> {
                                 );
                           },
                         ),
-                      ),
+                      ),*/
                       /*FutureBuilder<bool>(
                         future: apple.TheAppleSignIn.isAvailable(),
                         builder: (context, snapshot) {

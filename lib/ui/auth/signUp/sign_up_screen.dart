@@ -9,7 +9,7 @@ import 'package:tendance/constants.dart';
 import 'package:tendance/services/helper.dart';
 import 'package:tendance/ui/auth/authentication_bloc.dart';
 import 'package:tendance/ui/auth/signUp/sign_up_bloc.dart';
-import 'package:tendance/ui/home/home_screen.dart';
+import 'package:tendance/ui/home/student_home.dart';
 import 'package:tendance/ui/loading_cubit.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -44,7 +44,7 @@ class _SignUpState extends State<SignUpScreen> {
                   context.read<LoadingCubit>().hideLoading();
                   if (state.authState == AuthState.authenticated) {
                     pushAndRemoveUntil(
-                        context, HomeScreen(user: state.user!), false);
+                        context, HomeScreen(user: state.user!, title: '',), false);
                   } else {
                     showSnackBar(
                         context,

@@ -48,7 +48,9 @@ dependencies:
   image_picker: ^0.8.4+1
   cached_network_image: ^3.1.0
   smooth_page_indicator: ^1.0.0+2
-  progress_dialog: ^1.2.4
+  progress_dialog:
+    git:
+      url: https://github.com/mostafaAbdelazim/progress_dialog.git
 #  google_sign_in: ^5.2.1
   date_time_picker: ^2.1.0
   date_picker_timeline: ^1.2.3
@@ -102,20 +104,7 @@ flutter:
   assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-    - assets/images/default.svg
-    - assets/images/isolated_layout.svg
-    - assets/images/default.png
-    - assets/images/cover.png
-    - assets/images/profile.png
-    - assets/images/primdev_logo.png
-    - assets/images/my_image.jpg
-    - assets/images/faculty_felix.png
-    - assets/images/augusta_cct.png
-    - assets/images/splash_image.png
-    - assets/images/tended_logo.png
-    - assets/images/appbar_image.jpg
-    - assets/images/CCT_Tendance_noTagline.png
-    - assets/images/CCT_Tendance_noBG.png
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

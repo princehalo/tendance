@@ -20,19 +20,19 @@ class User {
 
   User(
       {this.email = '',
-      this.firstName = '',
-      this.lastName = '',
-      this.userID = '',
-        this.gender = '',
-        this.phoneNumber = '',
-        this.address = '',
-        this.session = '',
-        this.program = '',
-        this.semester = '',
-        this.matNumber = '',
-        this.username = '',
-        this.password = '',
-      this.profilePictureURL = ''})
+       this.firstName = '',
+       this.lastName = '',
+       this.userID = '',
+       this.gender = '',
+       this.phoneNumber = '',
+       this.address = '',
+       this.session = '',
+       this.program = '',
+       this.semester = '',
+       this.matNumber = '',
+       this.username = '',
+       this.password = '',
+       this.profilePictureURL = ''})
       : appIdentifier = 'Tendance ${Platform.operatingSystem}';
 
   String fullName() => '$firstName $lastName';
