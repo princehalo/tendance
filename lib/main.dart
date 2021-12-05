@@ -11,17 +11,17 @@ void main() => runApp(MultiRepositoryProvider(
         RepositoryProvider(create: (_) => AuthenticationBloc()),
         RepositoryProvider(create: (_) => LoadingCubit()),
       ],
-      child: const MyApp(),
+      child: const Tendance(),
     ));
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class Tendance extends StatefulWidget {
+  const Tendance({Key? key}) : super(key: key);
 
   @override
-  MyAppState createState() => MyAppState();
+  TendanceState createState() => TendanceState();
 }
 
-class MyAppState extends State<MyApp> with WidgetsBindingObserver {
+class TendanceState extends State<Tendance> with WidgetsBindingObserver {
   // Set default `_initialized` and `_error` state to false
   bool _initialized = false;
   bool _error = false;

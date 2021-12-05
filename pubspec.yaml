@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.14.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -49,7 +49,7 @@ dependencies:
   cached_network_image: ^3.1.0
   smooth_page_indicator: ^1.0.0+2
   progress_dialog: ^1.2.4
-  google_sign_in: ^5.2.1
+#  google_sign_in: ^5.2.1
   date_time_picker: ^2.1.0
   date_picker_timeline: ^1.2.3
   fzregex: ^2.0.0
@@ -63,8 +63,9 @@ dependencies:
 #  sqlbrite: ^2.1.0
 #  synchronized: ^3.0.0
 #  rxdart: ^0.27.2
-#  lint: ^1.5.3
+  lint: ^1.5.3
   url_launcher: ^6.0.11
+  bloc: ^7.2.1
 #  date_time_picker: ^2.1.0
 #  fluttertoast: ^8.0.8
 #  firebase_database: ^8.0.0

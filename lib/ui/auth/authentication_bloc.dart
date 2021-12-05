@@ -74,22 +74,22 @@ class AuthenticationBloc
             message: 'Apple login failed, Please try again.'));
       }
     });*/
-
-    on<LoginWithPhoneNumberEvent>((event, emit) async {
+    /*on<LoginWithPhoneNumberEvent>((event, emit) async {
       dynamic result =
-          await FireStoreUtils.loginOrCreateUserWithPhoneNumberCredential(
-              credential: event.credential,
-              phoneNumber: event.phoneNumber,
-              firstName: event.firstName,
-              lastName: event.lastName,
-              image: event.image);
+      await FireStoreUtils.loginOrCreateUserWithPhoneNumberCredential(
+          credential: event.credential,
+          phoneNumber: event.phoneNumber,
+          firstName: event.firstName,
+          lastName: event.lastName,
+          image: event.image);
       if (result is User) {
         user = result;
         emit(AuthenticationState.authenticated(result));
       } else if (result is String) {
         emit(AuthenticationState.unauthenticated(message: result));
       }
-    });
+    });*/
+
     on<SignupWithEmailAndPasswordEvent>((event, emit) async {
       dynamic result = await FireStoreUtils.signUpWithEmailAndPassword(
           emailAddress: event.emailAddress,

@@ -33,7 +33,7 @@ class User {
         this.username = '',
         this.password = '',
       this.profilePictureURL = ''})
-      : appIdentifier = 'Flutter Login Screen ${Platform.operatingSystem}';
+      : appIdentifier = 'Tendance ${Platform.operatingSystem}';
 
   String fullName() => '$firstName $lastName';
 

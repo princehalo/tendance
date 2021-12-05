@@ -211,40 +211,40 @@ class FireStoreUtils {
     }
   }
 
-  static Future<dynamic> loginOrCreateUserWithPhoneNumberCredential({
-    required auth.PhoneAuthCredential credential,
-    required String phoneNumber,
-    String? firstName = 'Anonymous',
-    String? lastName = 'User',
-    File? image,
-  }) async {
-    auth.UserCredential userCredential =
-        await auth.FirebaseAuth.instance.signInWithCredential(credential);
-    User? user = await getCurrentUser(userCredential.user?.uid ?? '');
-    if (user != null) {
-      return user;
-    } else {
-      /// create a new user from phone login
-      String profileImageUrl = '';
-      if (image != null) {
-        profileImageUrl = await uploadUserImageToServer(
-            image, userCredential.user?.uid ?? '');
-      }
-      User user = User(
-          firstName:
-              firstName!.trim().isNotEmpty ? firstName.trim() : 'Anonymous',
-          lastName: lastName!.trim().isNotEmpty ? lastName.trim() : 'User',
-          email: '',
-          profilePictureURL: profileImageUrl,
-          userID: userCredential.user?.uid ?? '');
-      String? errorMessage = await createNewUser(user);
-      if (errorMessage == null) {
-        return user;
-      } else {
-        return 'Couldn\'t create new user with phone number.';
-      }
-    }
-  }
+  // /*static Future<dynamic> loginOrCreateUserWithPhoneNumberCredential({
+  //   required auth.PhoneAuthCredential credential,
+  //   required String phoneNumber,
+  //   String? firstName = 'Anonymous',
+  //   String? lastName = 'User',
+  //   File? image,
+  // }) async {
+  //   auth.UserCredential userCredential =
+  //       await auth.FirebaseAuth.instance.signInWithCredential(credential);
+  //   User? user = await getCurrentUser(userCredential.user?.uid ?? '');
+  //   if (user != null) {
+  //     return user;
+  //   } else {
+  //     /// create a new user from phone login
+  //     String profileImageUrl = '';
+  //     if (image != null) {
+  //       profileImageUrl = await uploadUserImageToServer(
+  //           image, userCredential.user?.uid ?? '');
+  //     }
+  //     User user = User(
+  //         firstName:
+  //             firstName!.trim().isNotEmpty ? firstName.trim() : 'Anonymous',
+  //         lastName: lastName!.trim().isNotEmpty ? lastName.trim() : 'User',
+  //         email: '',
+  //         profilePictureURL: profileImageUrl,
+  //         userID: userCredential.user?.uid ?? '');
+  //     String? errorMessage = await createNewUser(user);
+  //     if (errorMessage == null) {
+  //       return user;
+  //     } else {
+  //       return 'Couldn\'t create new user with phone number.';
+  //     }
+  //   }
+  // }*/
 
   /*static loginWithApple() async {
     final appleCredential = await apple.TheAppleSignIn.performRequests([
